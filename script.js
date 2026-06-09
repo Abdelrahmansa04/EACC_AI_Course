@@ -6,6 +6,7 @@ let score = 0;
 let selectedDogs = [];
 
 const screens = [
+  welcome,
   trainAI,
   moreExamples,
   fastVsSmartAI,
@@ -85,6 +86,50 @@ function setFeedback(message) {
   }
 }
 
+function unlockNext(text = "Continue ➡") {
+  const btn = document.getElementById("nextBtn");
+
+  if (!btn) return;
+
+  btn.disabled = false;
+  btn.classList.remove("locked");
+  btn.innerHTML = text;
+  btn.onclick = next;
+}
+
+/* WELCOME */
+
+function welcome() {
+  aiPower = 0;
+
+  card(
+    `
+      <h2 class="title">Welcome AI Explorers!</h2>
+
+      <div class="ai-face">🤖</div>
+
+      <p class="text">Today you will train an AI.</p>
+      <p class="text">Can you make it smarter?</p>
+
+      <div class="row">
+        <div class="box">
+          <div class="box-title">Today's Mission</div>
+
+          <p class="text">Train AI</p>
+          <p class="text">Make AI smarter</p>
+          <p class="text">Make AI stronger</p>
+          <p class="text">Test AI</p>
+        </div>
+      </div>
+
+      <div class="nav">
+        <button onclick="next()">Start Mission 🚀</button>
+      </div>
+    `,
+    false
+  );
+}
+
 /* SCREEN 1 */
 
 function trainAI() {
@@ -110,6 +155,7 @@ function trainAI() {
       <p id="feedback" class="feedback">Start clicking 👆</p>
 
       <div class="nav">
+        <button class="blue" onclick="back()">⬅ Back</button>
         <button id="nextBtn" class="locked" disabled>Next 🔒</button>
       </div>
     `,
@@ -134,12 +180,7 @@ function trainCat(btn, total) {
   } else {
     score++;
     setFeedback("AI is ready! 🤖✨");
-
-    const nextBtn = document.getElementById("nextBtn");
-    nextBtn.disabled = false;
-    nextBtn.classList.remove("locked");
-    nextBtn.innerHTML = "Next ➡";
-    nextBtn.onclick = next;
+    unlockNext("Next ➡");
   }
 }
 
@@ -238,67 +279,59 @@ function testCat() {
   );
 }
 
+/* SCREEN 3 */
 
 function fastVsSmartAI() {
-  card(`
-    <h2 class="title">Which AI would you choose?</h2>
+  aiPower = 100;
 
-    <div class="row">
+  card(
+    `
+      <h2 class="title">Which AI would you choose?</h2>
 
-      <div class="box">
-        <div class="box-title">AI A</div>
-        <div class="big-emoji">🐱</div>
-        <p class="text">Power: 20%</p>
+      <div class="row">
+        <div class="box">
+          <div class="box-title">AI A</div>
+          <div class="big-emoji">🐱</div>
+          <p class="text">Power: 20%</p>
+        </div>
+
+        <div class="box">
+          <div class="box-title">AI B</div>
+          <div class="big-emoji">🐱 🐱 🐱 🐱 🐱</div>
+          <p class="text">Power: 100%</p>
+        </div>
       </div>
 
-      <div class="box">
-        <div class="box-title">AI B</div>
-        <div class="big-emoji">🐱 🐱 🐱 🐱 🐱</div>
-        <p class="text">Power: 100%</p>
+      <p class="text">Which AI would you choose?</p>
+
+      <div class="row">
+        <button class="red" onclick="chooseFastAI()">AI A</button>
+        <button onclick="chooseSmartAI()">AI B</button>
       </div>
 
-    </div>
+      <p id="feedback" class="feedback">Choose one AI 👆</p>
 
-    <p class="text">Which AI would you choose?</p>
-
-    <div class="row">
-      <button class="red" onclick="chooseFastAI()">AI A</button>
-      <button onclick="chooseSmartAI()">AI B</button>
-    </div>
-
-    <p id="feedback" class="feedback"></p>
-
-    <div class="nav">
-      <button class="blue" onclick="back()">⬅ Back</button>
-      <button id="nextBtn" class="locked" disabled>Next 🔒</button>
-    </div>
-  `, false);
+      <div class="nav">
+        <button class="blue" onclick="back()">⬅ Back</button>
+        <button id="nextBtn" class="locked" disabled>Next 🔒</button>
+      </div>
+    `,
+    false
+  );
 }
 
 function chooseFastAI() {
   setFeedback("AI A saw only a few examples.");
-
-  const btn = document.getElementById("nextBtn");
-  btn.disabled = false;
-  btn.classList.remove("locked");
-  btn.innerHTML = "Continue ➡";
-  btn.onclick = next;
+  unlockNext("Continue ➡");
 }
 
 function chooseSmartAI() {
   score++;
-
   setFeedback("Correct! More examples = smarter AI 📚");
-
-  const btn = document.getElementById("nextBtn");
-  btn.disabled = false;
-  btn.classList.remove("locked");
-  btn.innerHTML = "Continue ➡";
-  btn.onclick = next;
+  unlockNext("Continue ➡");
 }
 
-
-/* SCREEN 3 */
+/* SCREEN 4 */
 
 function varietyMatters() {
   aiPower = 50;
@@ -325,7 +358,7 @@ function varietyMatters() {
       <button onclick="rightVariety()">AI B</button>
     </div>
 
-    <p id="feedback" class="feedback"></p>
+    <p id="feedback" class="feedback">Choose one AI 👆</p>
   `);
 }
 
@@ -344,7 +377,7 @@ function wrongVariety() {
   setFeedback("AI A learned, but only one kind.");
 }
 
-/* SCREEN 4 */
+/* SCREEN 5 */
 
 function dogGame() {
   selectedDogs = [];
@@ -394,8 +427,7 @@ function pickDog(el, emoji, correct) {
     selectedDogs.push({ emoji, correct });
   }
 
-  const count = selectedDogs.length;
-  setFeedback(`${count} selected`);
+  setFeedback(`${selectedDogs.length} selected`);
 }
 
 function checkDogGame() {
@@ -422,7 +454,7 @@ function checkDogGame() {
   document.querySelector(".power-badge").textContent = `🤖 AI Power: ${aiPower}%`;
 }
 
-/* SCREEN 5 */
+/* SCREEN 6 */
 
 function aiChallenge() {
   aiPower = 80;
@@ -441,7 +473,7 @@ function aiChallenge() {
       <button class="yellow" onclick="challengeMaybe()">Maybe</button>
     </div>
 
-    <p id="feedback" class="feedback"></p>
+    <p id="feedback" class="feedback">Choose one answer 👆</p>
   `);
 }
 
@@ -458,7 +490,7 @@ function challengeMaybe() {
   setFeedback("Maybe it guesses, but it may be wrong 🤔");
 }
 
-/* SCREEN 6 */
+/* SCREEN 7 */
 
 function celebration() {
   aiPower = 100;
