@@ -4,24 +4,26 @@
 
 body {
   margin: 0;
-  overflow: hidden;
+  min-height: 100svh;
+  overflow-x: hidden;
   font-family: Arial, sans-serif;
   background: #eafffb;
 }
 
 .app {
-  height: 100vh;
+  min-height: 100svh;
   background: linear-gradient(180deg, #eafffb, #ffffff);
 }
 
 .header {
-  height: 78px;
+  min-height: 78px;
   background: linear-gradient(90deg, #00bfa6, #00d6c7);
   color: white;
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 10px 28px;
+  overflow: hidden;
 }
 
 .logo {
@@ -75,7 +77,7 @@ h1 {
 }
 
 .game {
-  height: calc(100vh - 78px);
+  min-height: calc(100svh - 78px);
   padding: 14px;
   display: flex;
   align-items: center;
@@ -85,14 +87,16 @@ h1 {
 .card {
   position: relative;
   width: min(1160px, 98vw);
-  height: calc(100vh - 105px);
+  min-height: min(760px, calc(100svh - 105px));
+  max-height: calc(100svh - 105px);
   background: white;
   border: 5px solid #00bfa6;
   border-radius: 26px;
   padding: 18px;
   text-align: center;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
-  overflow: hidden;
+  overflow: auto;
+  scrollbar-width: thin;
 }
 
 .power-badge {
@@ -271,6 +275,7 @@ button:active {
 
 @media (max-width: 850px) {
   .header {
+    min-height: 66px;
     gap: 10px;
     padding: 8px 12px;
   }
@@ -325,7 +330,9 @@ button:active {
 
 @media (max-width: 560px) {
   .header {
-    height: 62px;
+    min-height: 58px;
+    gap: 8px;
+    padding: 6px 9px;
   }
 
   .logo {
@@ -340,5 +347,139 @@ button:active {
 
   .header p {
     display: none;
+  }
+
+  .game {
+    min-height: calc(100svh - 58px);
+    padding: 6px;
+  }
+
+  .card {
+    width: 100%;
+    min-height: calc(100svh - 72px);
+    max-height: calc(100svh - 72px);
+    border-width: 3px;
+    border-radius: 18px;
+    padding: 9px;
+  }
+
+  .power-badge {
+    top: 8px;
+    right: 8px;
+    border-width: 2px;
+    border-radius: 12px;
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .text {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .ai-face {
+    font-size: 54px;
+  }
+
+  .big-emoji {
+    font-size: 48px;
+  }
+
+  .row {
+    gap: 6px;
+    margin: 7px 0;
+  }
+
+  button {
+    border-radius: 12px;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .emoji-btn,
+  .emoji-card {
+    width: 64px;
+    height: 58px;
+    border-width: 3px;
+    border-radius: 14px;
+    font-size: 30px;
+  }
+
+  .box {
+    width: 100%;
+    border-width: 3px;
+    border-radius: 14px;
+    padding: 8px;
+  }
+
+  .box-title {
+    font-size: 18px;
+  }
+
+  .feedback {
+    min-height: 28px;
+    font-size: 18px;
+  }
+
+  .counter {
+    border-width: 2px;
+    border-radius: 12px;
+    padding: 6px 10px;
+    font-size: 16px;
+  }
+
+  .nav {
+    position: static;
+    width: auto;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-height: 680px) {
+  .header {
+    min-height: 58px;
+  }
+
+  .logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .game {
+    min-height: calc(100svh - 58px);
+    padding: 7px;
+  }
+
+  .card {
+    min-height: calc(100svh - 72px);
+    max-height: calc(100svh - 72px);
+    padding: 8px;
+  }
+
+  .title {
+    font-size: 26px;
+    margin: 3px 0 5px;
+  }
+
+  .text {
+    font-size: 16px;
+    margin: 4px 0;
+  }
+
+  .ai-face {
+    font-size: 56px;
+  }
+
+  .big-emoji {
+    font-size: 48px;
+  }
+
+  .row {
+    margin: 6px 0;
   }
 }

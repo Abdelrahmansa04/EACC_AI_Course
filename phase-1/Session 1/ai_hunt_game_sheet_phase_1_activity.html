@@ -33,9 +33,9 @@
   html,
   body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: Arial, Helvetica, sans-serif;
     background: #eafffb;
     color: var(--text);
@@ -50,13 +50,13 @@
 
   .app-shell {
     width: min(1180px, calc(100vw - 24px));
-    height: calc(100vh - 24px);
+    min-height: calc(100svh - 24px);
     margin: 12px auto;
     background: rgba(255, 255, 255, 0.96);
     border: 5px solid var(--main);
     border-radius: 30px;
     box-shadow: var(--shadow);
-    overflow: hidden;
+    overflow: auto;
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     gap: 10px;
@@ -341,7 +341,7 @@
   @media (max-width: 900px) {
     .app-shell {
       width: calc(100vw - 16px);
-      height: calc(100vh - 16px);
+      min-height: calc(100svh - 16px);
       margin: 8px auto;
       border-width: 4px;
       border-radius: 24px;
@@ -379,7 +379,7 @@
   @media (max-width: 560px) {
     .app-shell {
       width: calc(100vw - 10px);
-      height: calc(100vh - 10px);
+      min-height: calc(100svh - 10px);
       margin: 5px auto;
       border-width: 3px;
       border-radius: 18px;
@@ -465,12 +465,13 @@
     }
 
     .bottom-row {
-      min-height: 46px;
-      grid-template-columns: 1fr auto auto;
+      min-height: auto;
+      grid-template-columns: 1fr 1fr;
       gap: 5px;
     }
 
     .status-panel {
+      grid-column: 1 / -1;
       border-radius: 14px;
       padding: 5px;
       border-width: 2px;
@@ -486,6 +487,7 @@
 
     .btn {
       min-height: 42px;
+      width: 100%;
       border-radius: 12px;
       padding: 0 8px;
       font-size: 11px;
@@ -499,7 +501,7 @@
 
   @media (max-height: 680px) {
     .app-shell {
-      height: calc(100vh - 10px);
+      min-height: calc(100svh - 10px);
       margin: 5px auto;
       padding: 7px;
       gap: 5px;
@@ -552,6 +554,30 @@
     .btn {
       min-height: 42px;
       padding: 0 12px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .top-bar {
+      grid-template-columns: auto 1fr;
+    }
+
+    .sessions-back {
+      order: 3;
+      grid-column: 1 / -1;
+      width: 100%;
+    }
+
+    .title-block {
+      text-align: left;
+    }
+
+    .sheet-title {
+      font-size: 19px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 </style>
