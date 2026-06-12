@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Hunt Game</title>
+
+<style>
+  :root {
+    --main: #00bfa6;
+    --main-2: #00d6c7;
+    --main-dark: #008b79;
+    --blue: #0f5fb8;
+    --blue-dark: #082b63;
+    --blue-soft: #eef7ff;
+    --yellow: #ffbe2e;
+    --yellow-dark: #c98c00;
+    --green: #0f8f68;
+    --green-soft: #e8f8f1;
+    --red: #d6452f;
+    --red-soft: #fff0ed;
+    --paper: #ffffff;
+    --text: #102033;
+    --muted: #5f6f89;
+    --border: #cde8e4;
+    --shadow: 0 22px 55px rgba(0, 139, 121, 0.16);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eafffb;
+    color: var(--text);
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 10% 12%, rgba(0, 214, 199, 0.22) 0 18%, transparent 32%),
+      radial-gradient(circle at 88% 88%, rgba(255, 190, 46, 0.28) 0 18%, transparent 34%),
+      linear-gradient(180deg, #eafffb 0%, #ffffff 100%);
+  }
+
+  .app-shell {
+    width: min(1180px, calc(100vw - 24px));
+    height: calc(100vh - 24px);
+    margin: 12px auto;
+    background: rgba(255, 255, 255, 0.96);
+    border: 5px solid var(--main);
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .top-bar {
+    min-height: 72px;
+    background: linear-gradient(90deg, var(--main), var(--main-2));
+    border-radius: 22px;
+    color: white;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 18px;
+    box-shadow: 0 12px 28px rgba(0, 139, 121, 0.18);
+  }
+
+  .logo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    background: white;
+    border-radius: 16px;
+    padding: 6px;
+  }
+
+  .sessions-back {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.68);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    padding: 0 14px;
+    text-decoration: none;
+    font-size: clamp(12px, 1vw, 15px);
+    font-weight: 900;
+    white-space: nowrap;
+    transition: background 0.16s ease, transform 0.16s ease;
+  }
+
+  .sessions-back:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-1px);
+  }
+
+  .title-block {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin: 0 0 2px;
+    font-size: clamp(11px, 1vw, 13px);
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.92;
+  }
+
+  .sheet-title {
+    margin: 0;
+    font-size: clamp(26px, 3.2vw, 46px);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -1px;
+  }
+
+  .top-score {
+    min-width: 92px;
+    border: 3px solid rgba(255, 255, 255, 0.68);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    padding: 8px 12px;
+    text-align: center;
+    font-weight: 900;
+    font-size: clamp(15px, 1.4vw, 20px);
+    white-space: nowrap;
+  }
+
+  .instruction-box {
+    background: linear-gradient(180deg, #f7fffd 0%, #eef7ff 100%);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    color: #153f73;
+    padding: 10px 14px;
+    text-align: center;
+    font-size: clamp(15px, 1.45vw, 20px);
+    line-height: 1.25;
+    font-weight: 800;
+  }
+
+  .instruction-box strong {
+    color: var(--main-dark);
+  }
+
+  .grid {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(8px, 1vw, 16px);
+  }
+
+  .obj-card {
+    min-width: 0;
+    min-height: 0;
+    background: #ffffff;
+    border: 2.5px solid #d3ebe7;
+    border-radius: 22px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    justify-items: center;
+    gap: 6px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    padding: clamp(8px, 1vw, 14px);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+    overflow: hidden;
+  }
+
+  .obj-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--main);
+    box-shadow: 0 14px 28px rgba(0, 139, 121, 0.12);
+  }
+
+  .icon-wrap {
+    width: clamp(46px, 5.4vw, 76px);
+    height: clamp(46px, 5.4vw, 76px);
+    border-radius: 24px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, #f3fbff, #effffb);
+  }
+
+  .icon-wrap svg {
+    width: clamp(34px, 4.2vw, 54px);
+    height: clamp(34px, 4.2vw, 54px);
+  }
+
+  .obj-label {
+    color: var(--text);
+    font-size: clamp(12px, 1.25vw, 17px);
+    font-weight: 900;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .badge {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    min-width: 36px;
+    height: 30px;
+    border-radius: 999px;
+    color: #fff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 12px;
+    border: 3px solid #fff;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.14);
+  }
+
+  .badge-ai {
+    background: var(--green);
+  }
+
+  .badge-no {
+    background: var(--red);
+  }
+
+  .obj-card.selected-ai {
+    background: var(--green-soft);
+    border-color: var(--green);
+  }
+
+  .obj-card.selected-no {
+    background: var(--red-soft);
+    border-color: var(--red);
+  }
+
+  .obj-card.selected-ai .badge-ai,
+  .obj-card.selected-no .badge-no {
+    display: flex;
+  }
+
+  .bottom-row {
+    min-height: 70px;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .status-panel {
+    height: 100%;
+    border-radius: 20px;
+    padding: 10px 14px;
+    border: 2px solid var(--border);
+    background: #f7fffd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .result-msg {
+    color: var(--blue-dark);
+    font-size: clamp(15px, 1.45vw, 20px);
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  .btn {
+    border: 0;
+    border-radius: 18px;
+    padding: 0 22px;
+    min-height: 62px;
+    font-size: clamp(15px, 1.4vw, 20px);
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    white-space: nowrap;
+  }
+
+  .btn:active {
+    transform: translateY(4px);
+  }
+
+  .reveal-btn {
+    background: var(--blue);
+    color: #fff;
+    box-shadow: 0 6px 0 var(--blue-dark);
+  }
+
+  .reveal-btn:hover {
+    background: #0b4f9b;
+  }
+
+  .reset-btn {
+    background: var(--yellow);
+    color: var(--text);
+    box-shadow: 0 6px 0 var(--yellow-dark);
+  }
+
+  .reset-btn:hover {
+    background: #ffcd5c;
+  }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: clamp(12px, 1vw, 15px);
+    font-weight: 900;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 900px) {
+    .app-shell {
+      width: calc(100vw - 16px);
+      height: calc(100vh - 16px);
+      margin: 8px auto;
+      border-width: 4px;
+      border-radius: 24px;
+      padding: 10px;
+      gap: 8px;
+    }
+
+    .top-bar {
+      min-height: 62px;
+      border-radius: 18px;
+      padding: 8px 12px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .bottom-row {
+      grid-template-columns: 1fr auto auto;
+      min-height: 58px;
+    }
+
+    .btn {
+      min-height: 52px;
+      padding: 0 14px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .app-shell {
+      width: calc(100vw - 10px);
+      height: calc(100vh - 10px);
+      margin: 5px auto;
+      border-width: 3px;
+      border-radius: 18px;
+      padding: 7px;
+      gap: 6px;
+    }
+
+    .top-bar {
+      min-height: 50px;
+      border-radius: 14px;
+      grid-template-columns: auto 1fr auto;
+      gap: 8px;
+      padding: 6px 8px;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      padding: 4px;
+    }
+
+    .eyebrow {
+      display: none;
+    }
+
+    .sheet-title {
+      font-size: 22px;
+      letter-spacing: -0.4px;
+    }
+
+    .top-score {
+      display: none;
+    }
+
+    .sessions-back {
+      min-height: 34px;
+      padding: 0 9px;
+      font-size: 11px;
+      border-radius: 10px;
+    }
+
+    .instruction-box {
+      padding: 6px 8px;
+      border-radius: 14px;
+      font-size: 12px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+    }
+
+    .obj-card {
+      border-width: 2px;
+      border-radius: 14px;
+      padding: 5px;
+      gap: 3px;
+    }
+
+    .icon-wrap {
+      width: 36px;
+      height: 36px;
+      border-radius: 13px;
+    }
+
+    .icon-wrap svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .obj-label {
+      font-size: 10px;
+    }
+
+    .badge {
+      top: 4px;
+      right: 4px;
+      min-width: 26px;
+      height: 22px;
+      border-width: 2px;
+      font-size: 9px;
+    }
+
+    .bottom-row {
+      min-height: 46px;
+      grid-template-columns: 1fr auto auto;
+      gap: 5px;
+    }
+
+    .status-panel {
+      border-radius: 14px;
+      padding: 5px;
+      border-width: 2px;
+    }
+
+    .result-msg {
+      font-size: 11px;
+    }
+
+    .legend {
+      display: none;
+    }
+
+    .btn {
+      min-height: 42px;
+      border-radius: 12px;
+      padding: 0 8px;
+      font-size: 11px;
+      box-shadow: 0 4px 0 var(--blue-dark);
+    }
+
+    .reset-btn {
+      box-shadow: 0 4px 0 var(--yellow-dark);
+    }
+  }
+
+  @media (max-height: 680px) {
+    .app-shell {
+      height: calc(100vh - 10px);
+      margin: 5px auto;
+      padding: 7px;
+      gap: 5px;
+    }
+
+    .top-bar {
+      min-height: 50px;
+      padding: 6px 10px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+    }
+
+    .instruction-box {
+      padding: 6px 10px;
+      font-size: clamp(12px, 1.2vw, 16px);
+    }
+
+    .grid {
+      gap: 6px;
+    }
+
+    .obj-card {
+      padding: 5px;
+      border-radius: 15px;
+      gap: 3px;
+    }
+
+    .icon-wrap {
+      width: clamp(34px, 4.8vw, 56px);
+      height: clamp(34px, 4.8vw, 56px);
+      border-radius: 16px;
+    }
+
+    .icon-wrap svg {
+      width: clamp(26px, 3.8vw, 42px);
+      height: clamp(26px, 3.8vw, 42px);
+    }
+
+    .obj-label {
+      font-size: clamp(10px, 1.05vw, 14px);
+    }
+
+    .bottom-row {
+      min-height: 48px;
+    }
+
+    .btn {
+      min-height: 42px;
+      padding: 0 12px;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <main class="app-shell">
+    <header class="top-bar">
+      <img class="logo" src="eacc-blue-logo.png" alt="EACC Logo" />
+      <a class="sessions-back" href="../index.html">All Sessions</a>
+
+      <div class="title-block">
+        <p class="eyebrow">Class Activity</p>
+        <h1 class="sheet-title">AI Hunt Game</h1>
+      </div>
+
+      <div class="top-score" id="top-score">⭐ — / 12</div>
+    </header>
+
+    <section class="instruction-box">
+      Tap a card: <strong>AI</strong> → <strong>NO</strong> → empty. Then press <strong>Reveal</strong>.
+    </section>
+
+    <section class="grid" id="grid"></section>
+
+    <section class="bottom-row">
+      <div class="status-panel">
+        <div>
+          <div class="result-msg" id="result-msg">Find the things that use AI.</div>
+          <div class="legend">
+            <span class="legend-item"><span class="legend-dot" style="background:#0f8f68"></span>AI</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#d6452f"></span>NO</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn reveal-btn" onclick="revealAnswers()">Reveal ✅</button>
+      <button class="btn reset-btn" onclick="resetGame()">Reset ↩</button>
+    </section>
+  </main>
+
+<script>
+const items = [
+  { label: "Smartphone", ai: true,  icon: "phone" },
+  { label: "Smart TV",   ai: true,  icon: "tv" },
+  { label: "Calculator", ai: false, icon: "calc" },
+  { label: "Maps", ai: true,  icon: "gps" },
+  { label: "Toaster", ai: false, icon: "toast" },
+  { label: "Siri / Alexa", ai: true, icon: "speaker" },
+  { label: "Light Switch", ai: false, icon: "switch" },
+  { label: "Netflix", ai: true,  icon: "stream" },
+  { label: "Bicycle", ai: false, icon: "bike" },
+  { label: "Face ID", ai: true,  icon: "faceid" },
+  { label: "Clock", ai: false, icon: "clock" },
+  { label: "Game Console", ai: true, icon: "game" }
+];
+
+const icons = {
+  phone: `<svg viewBox="0 0 44 44"><rect x="13" y="5" width="18" height="34" rx="4" fill="#eef6ff" stroke="#0f5fb8" stroke-width="2"/><circle cx="22" cy="34" r="1.8" fill="#0f5fb8"/></svg>`,
+  tv: `<svg viewBox="0 0 44 44"><rect x="8" y="11" width="28" height="20" rx="3" fill="#f3fbf8" stroke="#0f8f68" stroke-width="2"/><path d="M17 35h10" stroke="#0f8f68" stroke-width="2" stroke-linecap="round"/></svg>`,
+  calc: `<svg viewBox="0 0 44 44"><rect x="11" y="6" width="22" height="32" rx="3" fill="#f7f9fc" stroke="#64748b" stroke-width="2"/><rect x="15" y="11" width="14" height="7" rx="1" fill="#dbe7f5"/><rect x="15" y="22" width="5" height="4" fill="#64748b"/><rect x="24" y="22" width="5" height="4" fill="#64748b"/><rect x="15" y="29" width="5" height="4" fill="#64748b"/><rect x="24" y="29" width="5" height="4" fill="#64748b"/></svg>`,
+  gps: `<svg viewBox="0 0 44 44"><circle cx="22" cy="18" r="12" fill="#eaf3ff" stroke="#0f5fb8" stroke-width="2"/><circle cx="22" cy="18" r="5" fill="#0f5fb8"/><path d="M22 30l-5 8 5-3 5 3-5-8z" fill="#0f5fb8"/></svg>`,
+  toast: `<svg viewBox="0 0 44 44"><rect x="10" y="19" width="24" height="17" rx="4" fill="#fff7ed" stroke="#d97706" stroke-width="2"/><path d="M15 18v-6h7v7M25 18v-6h5v7" stroke="#fdba74" stroke-width="4" stroke-linecap="round"/><path d="M15 29q7-4 14 0" stroke="#d97706" stroke-width="1.5" fill="none"/></svg>`,
+  speaker: `<svg viewBox="0 0 44 44"><ellipse cx="22" cy="22" rx="12" ry="16" fill="#eaf3ff" stroke="#0f5fb8" stroke-width="2"/><circle cx="22" cy="17" r="4" fill="none" stroke="#0f5fb8" stroke-width="2"/><circle cx="22" cy="28" r="2" fill="#0f5fb8"/></svg>`,
+  switch: `<svg viewBox="0 0 44 44"><rect x="9" y="15" width="26" height="18" rx="4" fill="#f7f9fc" stroke="#64748b" stroke-width="2"/><rect x="17" y="20" width="10" height="8" rx="1.5" fill="#94a3b8"/></svg>`,
+  stream: `<svg viewBox="0 0 44 44"><rect x="8" y="12" width="28" height="20" rx="4" fill="#fff0ed" stroke="#d6452f" stroke-width="2"/><polygon points="18,17 30,22 18,27" fill="#d6452f"/></svg>`,
+  bike: `<svg viewBox="0 0 44 44"><circle cx="12" cy="30" r="8" fill="none" stroke="#0f8f68" stroke-width="2"/><circle cx="32" cy="30" r="8" fill="none" stroke="#0f8f68" stroke-width="2"/><path d="M12 30l10-14 10 14M22 16v-6M18 10h8" fill="none" stroke="#0f8f68" stroke-width="2" stroke-linecap="round"/></svg>`,
+  faceid: `<svg viewBox="0 0 44 44"><rect x="8" y="8" width="28" height="28" rx="7" fill="#eaf3ff" stroke="#0f5fb8" stroke-width="2"/><circle cx="17" cy="20" r="2" fill="#0f5fb8"/><circle cx="27" cy="20" r="2" fill="#0f5fb8"/><path d="M16 28q6 5 12 0" stroke="#0f5fb8" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  clock: `<svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="15" fill="#f7f9fc" stroke="#64748b" stroke-width="2"/><path d="M22 12v11h8" stroke="#64748b" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  game: `<svg viewBox="0 0 44 44"><rect x="8" y="15" width="28" height="18" rx="7" fill="#eaf3ff" stroke="#0f5fb8" stroke-width="2"/><path d="M15 24h8M19 20v8" stroke="#0f5fb8" stroke-width="2" stroke-linecap="round"/><circle cx="29" cy="23" r="2" fill="#0f5fb8"/><circle cx="33" cy="27" r="2" fill="#0f5fb8"/></svg>`
+};
+
+const selected = {};
+let revealed = false;
+
+function buildCard(item, index) {
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "obj-card";
+
+  if (selected[index] === true) card.classList.add("selected-ai");
+  if (selected[index] === false) card.classList.add("selected-no");
+
+  card.innerHTML = `
+    <span class="badge badge-ai">AI</span>
+    <span class="badge badge-no">NO</span>
+    <span class="icon-wrap">${icons[item.icon]}</span>
+    <span class="obj-label">${item.label}</span>
+  `;
+
+  card.onclick = () => {
+    if (revealed) return;
+
+    if (selected[index] === undefined) selected[index] = true;
+    else if (selected[index] === true) selected[index] = false;
+    else delete selected[index];
+
+    renderGame();
+  };
+
+  return card;
+}
+
+function renderGame() {
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  items.forEach((item, index) => grid.appendChild(buildCard(item, index)));
+}
+
+function revealAnswers() {
+  revealed = true;
+  let correct = 0;
+
+  items.forEach((item, index) => {
+    const answer = selected[index];
+
+    if (answer === item.ai) correct++;
+    if (answer === undefined && item.ai === false) correct++;
+
+    selected[index] = item.ai;
+  });
+
+  renderGame();
+
+  document.getElementById("top-score").textContent = `⭐ ${correct} / 12`;
+
+  let msg = "Good try!";
+  if (correct >= 11) msg = "AI Expert!";
+  else if (correct >= 9) msg = "Great job!";
+  else if (correct >= 6) msg = "Nice work!";
+
+  document.getElementById("result-msg").textContent = `${correct}/12 — ${msg}`;
+}
+
+function resetGame() {
+  Object.keys(selected).forEach(key => delete selected[key]);
+  revealed = false;
+  document.getElementById("top-score").textContent = "⭐ — / 12";
+  document.getElementById("result-msg").textContent = "Find the things that use AI.";
+  renderGame();
+}
+
+renderGame();
+</script>
+</body>
+</html>

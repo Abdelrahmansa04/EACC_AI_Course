@@ -3,25 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>AI Explorers Academy</title>
-  <link rel="icon" type="image/png" href="eacc-blue-logo.png" />
+  <title>EACC AI Course</title>
+  <link rel="icon" type="image/png" href="phase-1/Session%201/eacc-blue-logo.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <main class="app">
-    <header class="header">
-      <img src="eacc-blue-logo.png" class="logo" alt="EACC Logo" />
-      <div>
-        <h1>AI Explorers Academy</h1>
-        <p>Train the AI 🤖</p>
+  <main class="welcome-shell">
+    <nav class="top-nav" aria-label="Course header">
+      <img class="brand-mark" src="phase-1/Session%201/eacc-blue-logo.png" alt="EACC logo" />
+      <span>EACC AI Course</span>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">AI Explorers Academy</p>
+        <h1>Welcome to EACC AI Course</h1>
+        <p class="intro">Choose a phase to open the activities prepared for the current course sessions.</p>
       </div>
-    </header>
 
-    <section id="game" class="game"></section>
+      <a class="phase-card" href="phase-1/index.html" aria-label="Open Phase 1 sessions">
+        <span class="phase-number">01</span>
+        <span class="phase-title">Phase 1</span>
+        <span class="phase-meta">3 sessions available</span>
+        <span class="phase-action">Open Phase</span>
+      </a>
+    </section>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
