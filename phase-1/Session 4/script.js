@@ -1,146 +1,141 @@
-// ── GAME DATA ──
 const levels = [
   {
-    title: "AI Is Around You",
-    sub: "Mission 1 · Spot AI",
+    title: "Spot AI",
+    sub: "Mission 1",
     icon: "🌍",
     roboIntro: [
-      "Hey Explorer! 👋 I'm Robo, your AI guide.",
-      "Did you know AI is all around you? It's not just robots — it lives inside apps and devices you use every day!",
-      "I'll show you things one at a time. Your job: decide if it uses AI or not. 👇"
+      "Hi! I'm Robo.",
+      "AI is in apps you use every day.",
+      "Does each one use AI? Pick below."
     ],
-    roboStart: "Here's the next one! What do you think? 👇",
-    complete: "You can now spot AI everywhere! That's the very first step to using it wisely. 🌟",
+    roboStart: "What do you think?",
+    complete: "Great! You can spot AI now.",
     choices: [
-      { id: "ai",  icon: "🤖", label: "Uses AI",  sub: "Smart & learns",  color: "teal" },
-      { id: "not", icon: "—",  label: "No AI",    sub: "Just a tool",     color: "gray" }
+      { id: "ai", icon: "✓", label: "Yes", sub: "Uses AI", color: "teal" },
+      { id: "not", icon: "✗", label: "No", sub: "Not AI", color: "gray" }
     ],
     tasks: [
-      { emoji: "📺", label: "Video App",    text: "The app picks what to watch next — just for you.",       answer: "ai",  correct: "Yes! It watches what you like and learns your taste.",           wrong: "Look again — it actually learns what you enjoy!" },
-      { emoji: "🗺️", label: "Navigation",  text: "The map reroutes you when the road is busy.",             answer: "ai",  correct: "Exactly! It predicts traffic using AI patterns.",                 wrong: "Think again — it makes smart decisions in real time!" },
-      { emoji: "🎤", label: "Voice Helper", text: "You speak a question and it answers you instantly.",      answer: "ai",  correct: "Right! It uses AI to understand your words.",                    wrong: "It understands speech — that takes real AI!" },
-      { emoji: "✏️", label: "Object",       text: "You hold it and write on paper.",                         answer: "not", correct: "Correct! Simple and useful — but zero AI inside.",               wrong: "No AI here — it's just a pencil! 😄" },
-      { emoji: "📸", label: "Camera App",   text: "It recognises your face and groups photos automatically.", answer: "ai",  correct: "Yes! That's AI-powered photo recognition.",                     wrong: "Recognising faces automatically? That's definitely AI!" }
+      { emoji: "📺", label: "YouTube", text: "Picks the next video.", answer: "ai", correct: "Yes. AI picks videos.", wrong: "It learns what you like." },
+      { emoji: "🗺️", label: "Maps", text: "Finds a fast road.", answer: "ai", correct: "Yes. AI checks traffic.", wrong: "Maps use AI for routes." },
+      { emoji: "🎤", label: "Voice Helper", text: "Answers when you speak.", answer: "ai", correct: "Yes. AI hears you.", wrong: "Voice helpers use AI." },
+      { emoji: "✏️", label: "Pencil", text: "You write on paper.", answer: "not", correct: "Right. Not AI.", wrong: "A pencil is not AI." },
+      { emoji: "📸", label: "Photo App", text: "Groups faces in photos.", answer: "ai", correct: "Yes. AI sees faces.", wrong: "Face groups use AI." }
     ]
   },
   {
-    title: "What Can AI Do?",
-    sub: "Mission 2 · AI Superpowers",
+    title: "Helpful AI",
+    sub: "Mission 2",
     icon: "⚡",
     roboIntro: [
-      "Great job on Level 1! 🎉 You're a natural.",
-      "Now let's explore what AI is actually good at — and where it falls short.",
-      "AI can explain things, help you practise, translate languages… but it's not perfect at everything.",
-      "Is each example a ✅ smart use of AI — or ❌ not the best idea?"
+      "Nice work!",
+      "Some AI helps. Some does not.",
+      "Is this a smart use?"
     ],
-    roboStart: "Here we go! Trust your gut 👇",
-    complete: "You now know AI's superpowers — and its limits. Smart thinking! 🧠",
+    roboStart: "Helpful or not?",
+    complete: "You know when AI helps.",
     choices: [
-      { id: "good", icon: "✅", label: "Smart use",    sub: "AI helps here",  color: "green" },
-      { id: "bad",  icon: "❌", label: "Not the best", sub: "AI isn't ideal", color: "red"   }
+      { id: "good", icon: "✓", label: "Helpful", sub: "Good use", color: "green" },
+      { id: "bad", icon: "✗", label: "Not Helpful", sub: "Not ideal", color: "red" }
     ],
     tasks: [
-      { emoji: "💬", label: "Explain",   text: "You ask AI to explain a hard word in simple language.",    answer: "good", correct: "Yes! AI is great at breaking down tricky words.",               wrong: "Actually, this is a great use — AI explains things clearly!" },
-      { emoji: "📝", label: "Practice",  text: "AI gives you quiz questions to practise before a test.",  answer: "good", correct: "Smart! Practising with AI builds real skills.",                 wrong: "AI makes an excellent quiz partner — try it!" },
-      { emoji: "🌍", label: "Translate", text: "You translate a word from Arabic to English.",            answer: "good", correct: "Perfect — AI is great at language help!",                      wrong: "Translation is one of AI's best skills!" },
-      { emoji: "📋", label: "Homework",  text: "AI writes your whole homework and you copy it.",          answer: "bad",  correct: "Right! Copying stops you from actually learning.",              wrong: "If AI does it all, you learn nothing. Not great!" },
-      { emoji: "🏥", label: "Medicine",  text: "AI tells you exactly what medicine to take.",             answer: "bad",  correct: "Correct! Always ask a real doctor for health advice.",          wrong: "Health advice needs a real doctor — AI can get this wrong!" }
+      { emoji: "💬", label: "Explain", text: "AI explains a hard word.", answer: "good", correct: "Helpful. Good for learning.", wrong: "This is a good use." },
+      { emoji: "📝", label: "Practice", text: "AI gives quiz questions.", answer: "good", correct: "Helpful. Practice helps.", wrong: "Quizzes can help you learn." },
+      { emoji: "🌍", label: "Translate", text: "AI translates a word.", answer: "good", correct: "Helpful. Great for words.", wrong: "Translation is helpful." },
+      { emoji: "📋", label: "Copy Work", text: "AI writes all homework.", answer: "bad", correct: "Not helpful. Learn, don't copy.", wrong: "Copying stops learning." },
+      { emoji: "🏥", label: "Medicine", text: "AI picks your medicine.", answer: "bad", correct: "Not helpful. Ask a doctor.", wrong: "Health needs a real doctor." }
     ]
   },
   {
-    title: "Check Before You Trust",
-    sub: "Mission 3 · Fact Check",
+    title: "Check Facts",
+    sub: "Mission 3",
     icon: "🔍",
     roboIntro: [
-      "Here's a big secret about AI… 🤫",
-      "Even I can get things wrong sometimes!",
-      "AI can sound very confident — but that doesn't always mean it's right.",
-      "For each piece of info, tell me: is it fine to use, or should you check it first?"
+      "AI can be wrong.",
+      "Trust facts — or check first."
     ],
-    roboStart: "Ready to be a fact-checker? Go! 👇",
-    complete: "Brilliant! You know to always verify important info. That makes you smarter than AI! 🏆",
+    roboStart: "Fine or check?",
+    complete: "Smart! You check important facts.",
     choices: [
-      { id: "ok",    icon: "✓",  label: "Looks fine", sub: "Simple fact",     color: "green"  },
-      { id: "check", icon: "🔍", label: "Check it",   sub: "Needs verifying", color: "violet" }
+      { id: "ok", icon: "✓", label: "Looks Fine", sub: "Simple", color: "green" },
+      { id: "check", icon: "?", label: "Check It", sub: "Verify", color: "violet" }
     ],
     tasks: [
-      { emoji: "➕",  label: "Maths",     text: "AI answers: 2 + 2 = 4.",                           answer: "ok",    correct: "Yes, simple maths — you can trust this one!",          wrong: "Basic maths is correct, no check needed!" },
-      { emoji: "🐱",  label: "Wild Fact", text: "AI says: 'Cats can fly like birds.'",              answer: "check", correct: "Always check strange claims like this!",                wrong: "That's clearly wrong! Always check unexpected facts." },
-      { emoji: "📰",  label: "News",      text: "AI tells you something big happened today.",        answer: "check", correct: "Right! AI's knowledge has limits — check the news!",   wrong: "AI might not know today's events — always verify!" },
-      { emoji: "💊",  label: "Health",    text: "AI recommends a specific medicine for your cough.",answer: "check", correct: "Yes! Medical advice needs a real professional.",        wrong: "Never follow AI medical advice without a doctor's OK." },
-      { emoji: "📚",  label: "Source",    text: "AI names a website as the source of a fact.",      answer: "check", correct: "Smart! Always verify that the source actually exists.",  wrong: "AI sometimes invents sources — always double-check!" }
+      { emoji: "➕", label: "Math", text: "2 + 2 = 4", answer: "ok", correct: "Fine. Simple math.", wrong: "Basic math is OK." },
+      { emoji: "🐱", label: "Wild Fact", text: "Cats can fly.", answer: "check", correct: "Check it. That's wrong.", wrong: "Strange facts need checking." },
+      { emoji: "📰", label: "News", text: "Big news from AI today.", answer: "check", correct: "Check it. AI may not know.", wrong: "Verify news elsewhere." },
+      { emoji: "💊", label: "Health", text: "AI picks medicine.", answer: "check", correct: "Check with a doctor.", wrong: "Always ask a doctor." },
+      { emoji: "📚", label: "Source", text: "AI names a website.", answer: "check", correct: "Check if it's real.", wrong: "Sources can be wrong." }
     ]
   },
   {
-    title: "Stay Safe Online",
-    sub: "Mission 4 · Privacy & Safety",
+    title: "Stay Safe",
+    sub: "Mission 4",
     icon: "🔒",
     roboIntro: [
-      "Almost there, Explorer! 🌟",
-      "This is the most important mission: staying safe when you use AI and apps.",
-      "Some things are fine to share — others need an adult's help first.",
-      "Decide: safe to share, or ask a trusted adult?"
+      "Last mission: safety.",
+      "Some info is OK. Some needs an adult."
     ],
-    roboStart: "Your safety matters most! Choose carefully 👇",
-    complete: "You're now a Safety Champion! 🛡️ Remember: when in doubt, ask a trusted adult. Mission complete!",
+    roboStart: "Safe or ask adult?",
+    complete: "You finished all missions!",
     choices: [
-      { id: "safe", icon: "✅", label: "Safe to share",  sub: "Not private",     color: "green"  },
-      { id: "ask",  icon: "🙋", label: "Ask an adult",   sub: "Private or risky", color: "orange" }
+      { id: "safe", icon: "✓", label: "Safe", sub: "OK to share", color: "green" },
+      { id: "ask", icon: "!", label: "Ask Adult", sub: "Private", color: "orange" }
     ],
     tasks: [
-      { emoji: "🎨", label: "Simple",   text: "You tell an AI app your favourite colour is blue.",      answer: "safe", correct: "That's harmless — favourite colours aren't private.",           wrong: "This is actually totally fine to share!" },
-      { emoji: "🏠", label: "Address",  text: "An app asks for your home address and phone number.",    answer: "ask",  correct: "Yes! Never share your address without an adult.",               wrong: "Address and phone number are private — always ask an adult!" },
-      { emoji: "🔑", label: "Password", text: "AI asks for your school account password to 'help'.",   answer: "ask",  correct: "Correct! No app ever needs your password.",                      wrong: "Never give out passwords — not even to AI!" },
-      { emoji: "😄", label: "Nickname", text: "You use a fun nickname like 'StarExplorer' in the app.",answer: "safe", correct: "Smart! A nickname keeps your real name private.",                wrong: "A nickname is great — it protects your real name!" },
-      { emoji: "😈", label: "Unsafe",   text: "Someone online asks you to keep your chat a secret.",   answer: "ask",  correct: "Right! Secrets from adults are a warning sign. Tell someone!", wrong: "Secrets from trusted adults are never OK — tell someone!" }
+      { emoji: "🎨", label: "Color", text: "Favorite color is blue.", answer: "safe", correct: "Safe. Not private.", wrong: "Colors are fine to share." },
+      { emoji: "🏠", label: "Address", text: "App asks your home address.", answer: "ask", correct: "Ask an adult. Keep private.", wrong: "Address is private." },
+      { emoji: "🔑", label: "Password", text: "App wants your password.", answer: "ask", correct: "Never share passwords.", wrong: "Passwords stay secret." },
+      { emoji: "😄", label: "Nickname", text: "Fun nickname in app.", answer: "safe", correct: "Safe. Nicknames are OK.", wrong: "Nicknames protect you." },
+      { emoji: "😈", label: "Secret Chat", text: "Someone says keep it secret.", answer: "ask", correct: "Tell an adult.", wrong: "Tell a trusted adult." }
     ]
   }
 ];
 
-// ── STATE ──
-let levelIdx = 0, taskIdx = 0, activeTasks = [], answeredCount = 0, locked = false;
+let levelIdx = 0;
+let taskIdx = 0;
+let activeTasks = [];
+let answeredCount = 0;
+let locked = false;
 
-// ── DOM HELPERS ──
-const $ = id => document.getElementById(id);
+const $ = (id) => document.getElementById(id);
 
-const chatArea   = $('chatArea');
-const modal      = $('modal');
-const modalIcon  = $('modalIcon');
-const modalKicker= $('modalKicker');
-const modalTitle = $('modalTitle');
-const modalText  = $('modalText');
-const modalNext  = $('modalNext');
-const modalBtn   = $('modalBtn');
-const levelTitle = $('levelTitle');
-const levelSub   = $('levelSub');
-const levelIcon  = $('levelIcon');
-const stepDots   = $('stepDots');
-const sceneCard  = $('sceneCard');
-const sceneEmoji = $('sceneEmoji');
-const sceneLabel = $('sceneLabel');
-const choicesEl  = $('choices');
-const nextBtn    = $('nextBtn');
-const restartBtn = $('restartBtn');
-const levelPills = $('levelPills');
-const eyeL       = $('eyeL');
-const eyeR       = $('eyeR');
-const roboMouth  = $('roboMouth');
-const roboMood   = $('roboMood');
+const chatArea = $("chatArea");
+const modal = $("modal");
+const modalIcon = $("modalIcon");
+const modalKicker = $("modalKicker");
+const modalTitle = $("modalTitle");
+const modalText = $("modalText");
+const modalNext = $("modalNext");
+const modalBtn = $("modalBtn");
+const levelTitle = $("levelTitle");
+const levelSub = $("levelSub");
+const levelIcon = $("levelIcon");
+const stepDots = $("stepDots");
+const sceneCard = $("sceneCard");
+const sceneEmoji = $("sceneEmoji");
+const sceneTitle = $("sceneTitle");
+const sceneLabel = $("sceneLabel");
+const choicesEl = $("choices");
+const nextBtn = $("nextBtn");
+const restartBtn = $("restartBtn");
+const levelPills = $("levelPills");
+const eyeL = $("eyeL");
+const eyeR = $("eyeR");
+const roboMouth = $("roboMouth");
+const roboMood = $("roboMood");
 
-// ── ROBO EMOTION ──
 function setMood(mood) {
   eyeL.className = eyeR.className = `robo-eye ${mood}`;
-  const mouthMap = { happy: 'smile', sad: 'frown', think: '', '': '' };
-  roboMouth.className = `robo-mouth ${mouthMap[mood] || ''}`;
-  const labels = { happy: 'Celebrating! 🎉', sad: 'Hmm, try again…', think: 'Thinking… 🤔', '': 'Your AI Guide' };
-  roboMood.textContent = labels[mood] || 'Your AI Guide';
+  const mouthMap = { happy: "smile", sad: "frown", think: "", "": "" };
+  roboMouth.className = `robo-mouth ${mouthMap[mood] || ""}`;
+  const labels = { happy: "Great!", sad: "Try again", think: "Thinking…", "": "Your guide" };
+  roboMood.textContent = labels[mood] || "Your guide";
 }
 
-// ── CHAT ──
-function addChat(who, text, type = '') {
-  const msg = document.createElement('div');
+function addChat(who, text, type = "") {
+  const msg = document.createElement("div");
   msg.className = `chat-msg ${who}`;
-  if (who === 'robo') {
+  if (who === "robo") {
     msg.innerHTML = `<div class="chat-avatar">🤖</div><div class="chat-bubble ${type}">${text}</div>`;
   } else {
     msg.innerHTML = `<div class="chat-bubble user ${type}">${text}</div>`;
@@ -150,243 +145,276 @@ function addChat(who, text, type = '') {
 }
 
 function roboType(messages, delay, cb) {
-  delay = delay || 0;
   let i = 0;
+  delay = delay || 0;
 
   function next() {
-    if (i >= messages.length) { if (cb) cb(); return; }
-    const typing = document.createElement('div');
-    typing.className = 'chat-msg robo';
-    typing.innerHTML = `<div class="chat-avatar">🤖</div><div class="chat-bubble"><div class="typing-dot"><span></span><span></span><span></span></div></div>`;
+    if (i >= messages.length) {
+      if (cb) cb();
+      return;
+    }
+    const typing = document.createElement("div");
+    typing.className = "chat-msg robo";
+    typing.innerHTML =
+      '<div class="chat-avatar">🤖</div><div class="chat-bubble"><div class="typing-dot"><span></span><span></span><span></span></div></div>';
     chatArea.appendChild(typing);
     chatArea.scrollTop = chatArea.scrollHeight;
-    setMood('think');
+    setMood("think");
 
-    setTimeout(function () {
+    setTimeout(() => {
       typing.remove();
-      addChat('robo', messages[i]);
-      setMood('');
+      addChat("robo", messages[i]);
+      setMood("");
       i++;
-      setTimeout(next, 600);
-    }, 900 + delay);
+      setTimeout(next, 500);
+    }, 700 + delay);
     delay = 0;
   }
 
-  setTimeout(next, 400);
+  setTimeout(next, 300);
 }
 
-// ── LEVEL PILLS ──
 function renderPills() {
-  levelPills.innerHTML = levels.map(function (l, i) {
-    var cls = '';
-    if (i < levelIdx) cls = 'done';
-    else if (i === levelIdx) cls = 'active';
-    return `<div class="level-pill ${cls}" title="${l.title}">${l.icon}</div>`;
-  }).join('');
+  levelPills.innerHTML = levels
+    .map((l, i) => {
+      let cls = "";
+      if (i < levelIdx) cls = "done";
+      else if (i === levelIdx) cls = "active";
+      return `<div class="level-pill ${cls}" title="${l.title}">${l.icon}</div>`;
+    })
+    .join("");
 }
 
-// ── STEP DOTS ──
 function renderDots() {
-  stepDots.innerHTML = activeTasks.map(function (_, i) {
-    var cls = i < answeredCount ? 'done' : i === taskIdx ? 'active' : '';
-    return `<div class="step-dot ${cls}"></div>`;
-  }).join('');
+  stepDots.innerHTML = activeTasks
+    .map((_, i) => {
+      let cls = "";
+      if (i < answeredCount) cls = "done";
+      else if (i === taskIdx) cls = "active";
+      return `<div class="step-dot ${cls}"></div>`;
+    })
+    .join("");
 }
 
-// ── SHOW TASK ──
 function showTask() {
   const level = levels[levelIdx];
-  const task  = activeTasks[taskIdx];
+  const task = activeTasks[taskIdx];
 
-  sceneCard.className = 'scene-card';
+  sceneCard.className = "scene-card focused is-entering";
   sceneEmoji.textContent = task.emoji;
+  sceneEmoji.classList.remove("emoji-pop");
+  void sceneEmoji.offsetWidth;
+  sceneEmoji.classList.add("emoji-pop");
+  sceneTitle.textContent = task.label;
   sceneLabel.textContent = task.text;
 
-  const count = level.choices.length;
-  const cols  = count === 2 ? 'two' : count === 3 ? 'three' : 'four';
-  choicesEl.className = `choices ${cols}`;
-  choicesEl.innerHTML = '';
+  window.setTimeout(() => {
+    sceneCard.classList.remove("is-entering");
+  }, 460);
 
-  level.choices.forEach(function (c) {
-    const btn = document.createElement('button');
-    btn.className = 'choice-btn';
-    btn.type = 'button';
+  const count = level.choices.length;
+  const cols = count === 2 ? "two" : count === 3 ? "three" : "four";
+  choicesEl.className = `choices ${cols} choice-entering`;
+  choicesEl.innerHTML = "";
+
+  level.choices.forEach((c, index) => {
+    const btn = document.createElement("button");
+    btn.className = `choice-btn choice-${c.color}`;
+    btn.style.setProperty("--stagger", index);
+    btn.type = "button";
+    btn.setAttribute("aria-label", `${c.label}: ${c.sub}`);
     btn.innerHTML = `
       <div class="choice-icon">${c.icon}</div>
       <div class="choice-text">
         <span class="choice-label">${c.label}</span>
         <span class="choice-sub">${c.sub}</span>
       </div>`;
-    btn.onclick = function () { pick(c.id); };
+    btn.addEventListener("click", () => pick(c.id));
     choicesEl.appendChild(btn);
   });
 
   nextBtn.disabled = true;
+  nextBtn.classList.remove("ready");
   locked = false;
   renderDots();
+
+  window.setTimeout(() => {
+    choicesEl.classList.remove("choice-entering");
+  }, 520);
 }
 
-// ── PICK ──
 function pick(id) {
   if (locked) return;
   locked = true;
 
-  const level     = levels[levelIdx];
-  const task      = activeTasks[taskIdx];
-  const correct   = id === task.answer;
-  const choice    = level.choices.find(function (c) { return c.id === id; });
-  const choiceName= choice ? choice.label : id;
-  const buttons   = choicesEl.querySelectorAll('.choice-btn');
+  const level = levels[levelIdx];
+  const task = activeTasks[taskIdx];
+  const correct = id === task.answer;
+  const choice = level.choices.find((c) => c.id === id);
+  const choiceName = choice ? choice.label : id;
+  const buttons = choicesEl.querySelectorAll(".choice-btn");
 
-  level.choices.forEach(function (c, i) {
+  level.choices.forEach((c, i) => {
     buttons[i].disabled = true;
+    buttons[i].setAttribute("aria-pressed", c.id === id ? "true" : "false");
     if (c.id === id) {
-      buttons[i].className += correct ? ' selected-correct' : ' selected-wrong';
+      buttons[i].classList.add(correct ? "selected-correct" : "selected-wrong");
+    } else {
+      buttons[i].classList.add("dimmed");
     }
   });
 
-  sceneCard.classList.add(correct ? 'correct' : 'wrong');
-  addChat('user', choiceName);
+  sceneCard.classList.add(correct ? "correct" : "wrong");
+  addChat("user", choiceName);
 
   if (correct) {
-    setMood('happy');
+    setMood("happy");
     answeredCount++;
     renderDots();
-    addChat('robo', '✅ ' + task.correct, 'correct');
+    addChat("robo", task.correct, "correct");
     spawnConfetti();
     nextBtn.disabled = false;
+    nextBtn.classList.add("ready");
   } else {
-    setMood('sad');
-    addChat('robo', '❌ ' + task.wrong, 'wrong');
-    setTimeout(function () {
+    setMood("sad");
+    addChat("robo", task.wrong, "wrong");
+    setTimeout(() => {
       locked = false;
-      sceneCard.classList.remove('wrong');
-      buttons.forEach(function (b) {
+      sceneCard.classList.remove("wrong");
+      buttons.forEach((b, i) => {
         b.disabled = false;
-        b.className = 'choice-btn';
+        b.className = `choice-btn choice-${level.choices[i].color}`;
+        b.removeAttribute("aria-pressed");
       });
-      setMood('');
-    }, 1400);
+      setMood("");
+    }, 1200);
   }
 }
 
-// ── NEXT TASK ──
 function nextTask() {
-  taskIdx++;
-  if (taskIdx < activeTasks.length) {
-    showTask();
-    roboType([levels[levelIdx].roboStart]);
-    return;
-  }
-  finishLevel();
+  nextBtn.disabled = true;
+  nextBtn.classList.remove("ready");
+  sceneCard.classList.add("leaving");
+  choicesEl.classList.add("choices-leaving");
+
+  window.setTimeout(() => {
+    taskIdx++;
+    sceneCard.classList.remove("leaving");
+    choicesEl.classList.remove("choices-leaving");
+
+    if (taskIdx < activeTasks.length) {
+      showTask();
+      roboType([levels[levelIdx].roboStart]);
+      return;
+    }
+    finishLevel();
+  }, 220);
 }
 
-// ── FINISH LEVEL ──
 function finishLevel() {
   const level = levels[levelIdx];
-  setMood('happy');
-  addChat('robo', '🏆 ' + level.complete, 'correct');
+  setMood("happy");
+  addChat("robo", level.complete, "correct");
 
   if (levelIdx < levels.length - 1) {
     const next = levels[levelIdx + 1];
-    modalIcon.textContent    = '🎉';
-    modalKicker.textContent  = 'Level Complete!';
-    modalTitle.textContent   = level.title;
-    modalText.textContent    = level.complete;
-    modalNext.style.display  = 'flex';
-    modalNext.innerHTML      = `<span>${next.icon}</span> Next up: <strong>${next.title}</strong>`;
-    modalBtn.textContent     = 'Next Level →';
-    modalBtn.onclick = function () {
-      modal.style.display = 'none';
+    modalIcon.textContent = "🎉";
+    modalKicker.textContent = "Level done";
+    modalTitle.textContent = level.title;
+    modalText.textContent = level.complete;
+    modalNext.hidden = false;
+    modalNext.innerHTML = `<span>${next.icon}</span> Next: <strong>${next.title}</strong>`;
+    modalBtn.textContent = "Next mission";
+    modalBtn.onclick = () => {
+      modal.hidden = true;
       levelIdx++;
       startLevel();
     };
   } else {
-    modalIcon.textContent   = '🏆';
-    modalKicker.textContent = 'All Done!';
-    modalTitle.textContent  = 'You are an AI Explorer!';
-    modalText.textContent   = 'Amazing! You finished all missions. You can spot AI, use it wisely, check facts, and stay safe. The world needs smart thinkers like you!';
-    modalNext.style.display = 'none';
-    modalBtn.textContent    = 'Play Again 🔄';
-    modalBtn.onclick = function () {
-      modal.style.display = 'none';
+    modalIcon.textContent = "🏆";
+    modalKicker.textContent = "All done";
+    modalTitle.textContent = "You finished!";
+    modalText.textContent = "You spot AI, use it well, check facts, and stay safe.";
+    modalNext.hidden = true;
+    modalBtn.textContent = "Play again";
+    modalBtn.onclick = () => {
+      modal.hidden = true;
       levelIdx = 0;
       startLevel();
     };
   }
 
   spawnConfetti();
-  setTimeout(function () { modal.style.display = 'grid'; }, 700);
+  setTimeout(() => {
+    modal.hidden = false;
+  }, 600);
 }
 
-// ── START LEVEL ──
 function startLevel() {
   const level = levels[levelIdx];
-  taskIdx      = 0;
-  answeredCount= 0;
-  locked       = false;
-  activeTasks  = shuffle(level.tasks.slice());
+  taskIdx = 0;
+  answeredCount = 0;
+  locked = false;
+  activeTasks = shuffle(level.tasks.slice());
 
   levelTitle.textContent = level.title;
-  levelSub.textContent   = level.sub;
-  levelIcon.textContent  = level.icon;
+  levelSub.textContent = level.sub;
+  levelIcon.textContent = level.icon;
 
-  chatArea.innerHTML = '';
-  setMood('');
+  chatArea.innerHTML = "";
+  setMood("");
   renderPills();
   renderDots();
   showTask();
 
-  roboType(level.roboIntro, 300, function () {
+  roboType(level.roboIntro, 200, () => {
     roboType([level.roboStart]);
   });
 }
 
-// ── UTILS ──
 function shuffle(arr) {
-  for (var i = arr.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
   }
   return arr;
 }
 
 function spawnConfetti() {
-  var items = ['✨','🌟','🎉','⭐','💫','🤖','🎊','💜'];
-  for (var i = 0; i < 12; i++) {
-    var el = document.createElement('div');
-    el.className   = 'confetti-piece';
+  const items = ["✨", "🎉", "✅", "👏"];
+  for (let i = 0; i < 10; i++) {
+    const el = document.createElement("div");
+    el.className = "confetti-piece";
     el.textContent = items[Math.floor(Math.random() * items.length)];
-    el.style.left  = (8 + Math.random() * 84) + '%';
-    el.style.top   = (Math.random() * 15) + '%';
+    el.style.left = 8 + Math.random() * 84 + "%";
+    el.style.top = Math.random() * 15 + "%";
     document.body.appendChild(el);
-    (function (node) {
-      setTimeout(function () { node.remove(); }, 1100);
-    })(el);
+    setTimeout(() => el.remove(), 1000);
   }
 }
 
-// ── INIT ──
 function openIntro() {
-  modalIcon.textContent    = '🤖';
-  modalKicker.textContent  = 'AI Guide Mission';
-  modalTitle.textContent   = 'Meet Robo!';
-  modalText.textContent    = "Hi Explorer! I'm Robo, your AI buddy. I'll teach you what AI is, how to use it wisely, and how to stay safe — one level at a time. Let's go!";
-  modalNext.style.display  = 'none';
-  modalBtn.textContent     = 'Start Exploring 🚀';
-  modalBtn.onclick = function () {
-    modal.style.display = 'none';
+  modalIcon.textContent = "🤖";
+  modalKicker.textContent = "Session 4";
+  modalTitle.textContent = "Meet Robo";
+  modalText.textContent = "Four short missions. Robo will guide you.";
+  modalNext.hidden = true;
+  modalBtn.textContent = "Start";
+  modalBtn.onclick = () => {
+    modal.hidden = true;
     startLevel();
   };
-  modal.style.display = 'grid';
+  modal.hidden = false;
 }
 
-nextBtn.onclick    = nextTask;
-restartBtn.onclick = function () {
+nextBtn.addEventListener("click", nextTask);
+restartBtn.addEventListener("click", () => {
   levelIdx = 0;
-  modal.style.display = 'none';
-  chatArea.innerHTML  = '';
+  modal.hidden = true;
+  chatArea.innerHTML = "";
   openIntro();
-};
+});
 
 openIntro();
