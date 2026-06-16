@@ -278,34 +278,25 @@ function pick(id) {
 
   sceneCard.classList.add(correct ? "correct" : "wrong");
   addChat("user", choiceName);
+  answeredCount++;
+  renderDots();
 
   if (correct) {
     setMood("happy");
-    answeredCount++;
-    renderDots();
     addChat("robo", task.correct, "correct");
     spawnConfetti();
-    nextBtn.disabled = false;
   } else {
     setMood("sad");
     addChat("robo", task.wrong, "wrong");
-    setTimeout(() => {
-      locked = false;
-      sceneCard.classList.remove("wrong");
-      buttons.forEach((b) => {
-        b.disabled = false;
-        b.className = b.dataset.baseClass || "choice-btn";
-      });
-      setMood("");
-    }, 1200);
   }
+
+  nextBtn.disabled = false;
 }
 
 function nextTask() {
   taskIdx++;
   if (taskIdx < activeTasks.length) {
     showTask();
-    roboType([levels[levelIdx].roboStart]);
     return;
   }
   finishLevel();
