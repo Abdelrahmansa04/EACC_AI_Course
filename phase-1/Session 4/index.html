@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn AI with Robo · AI Explorers</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-dot">🤖</div>
+        <div>
+          <h1>AI Explorers</h1>
+          <p>Learn · Think · Stay Safe</p>
+        </div>
+      </div>
+      <div class="level-pills" id="levelPills"></div>
+    </header>
+
+    <!-- GAME -->
+    <div class="game">
+
+      <!-- LEFT: ROBO + CHAT -->
+      <div class="robo-panel">
+
+        <div class="robo-card">
+          <!-- Robot character -->
+          <div class="robo-wrap">
+            <div class="robo-head" id="roboHead">
+              <div class="robo-antenna"></div>
+              <div class="robo-eyes">
+                <div class="robo-eye" id="eyeL"></div>
+                <div class="robo-eye" id="eyeR"></div>
+              </div>
+              <div class="robo-mouth" id="roboMouth"></div>
+            </div>
+            <div class="robo-body">
+              <div class="robo-chest"></div>
+            </div>
+            <div class="robo-arm"></div>
+            <div class="robo-legs">
+              <div class="robo-leg"></div>
+              <div class="robo-leg"></div>
+            </div>
+          </div>
+          <div class="robo-label">Robo</div>
+          <div class="robo-subtitle" id="roboMood">Your AI Guide</div>
+        </div>
+
+        <!-- Chat messages -->
+        <div class="chat-area" id="chatArea"></div>
+
+      </div><!-- /robo-panel -->
+
+      <!-- RIGHT: MISSION -->
+      <div class="main-panel">
+
+        <!-- Level header -->
+        <div class="level-header">
+          <div class="level-badge">
+            <div class="icon" id="levelIcon">🌍</div>
+            <div>
+              <h2 id="levelTitle">Loading…</h2>
+              <p id="levelSub">Mission 1</p>
+            </div>
+          </div>
+          <div class="step-dots" id="stepDots"></div>
+        </div>
+
+        <!-- Scene display -->
+        <div class="scene-card" id="sceneCard">
+          <div class="scene-emoji-big" id="sceneEmoji">🤖</div>
+          <div class="scene-label" id="sceneLabel">Getting ready…</div>
+        </div>
+
+        <!-- Choice buttons -->
+        <div class="choices" id="choices"></div>
+
+        <!-- Navigation -->
+        <div class="controls">
+          <button class="btn-secondary" id="restartBtn" type="button">↩ Restart</button>
+          <button class="btn-primary"   id="nextBtn"    type="button" disabled>Continue →</button>
+        </div>
+
+      </div><!-- /main-panel -->
+
+    </div><!-- /game -->
+
+  </div><!-- /app -->
+
+  <!-- INTRO / LEVEL COMPLETE MODAL -->
+  <div class="modal-overlay" id="modal" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-icon"   id="modalIcon">🤖</div>
+      <div class="modal-kicker" id="modalKicker">AI Guide</div>
+      <h2 id="modalTitle">Meet Robo</h2>
+      <p  id="modalText">Hi! I'm Robo. Let's explore AI together!</p>
+      <div class="modal-next" id="modalNext" style="display:none;"></div>
+      <button class="btn-primary" id="modalBtn" type="button"
+              style="width:100%; height:50px; font-size:16px;">
+        Let's go! 🚀
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
